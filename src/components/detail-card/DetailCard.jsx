@@ -11,7 +11,7 @@ const DetailCard = ({ item }) => {
     <div className="card">
       <img
         className="cardImg"
-        src={getFirstImageFromAlbum(item?.userId)}
+        src={getFirstImageFromAlbum(item?.id)}
         alt="thumbnail"
         onClick={() => navigate(`/album/${item?.id}`)}
       />
