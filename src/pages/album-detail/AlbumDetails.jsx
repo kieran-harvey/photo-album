@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { getPhotoAlbum, getAlbumInfo } from "../../utils";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "./album-detail.css";
-import Header from "../../components/header/Header";
 
 const AlbumDetails = () => {
   const { id } = useParams();
@@ -10,7 +9,6 @@ const AlbumDetails = () => {
   const albumInfo = getAlbumInfo(parseInt(id));
   const [clickedImage, setClickedImage] = useState();
   const [showModal, setShowModal] = useState(false);
-  const navigate = useNavigate();
   const setImage = (id) => {
     const photo = photoAlbum.filter((photo) => photo.id === parseInt(id));
     setClickedImage(photo);
@@ -18,7 +16,6 @@ const AlbumDetails = () => {
   };
   return (
     <>
-      <Header />
       <div>
         <div className="album-details-container">
           <div className="left-side">
@@ -43,8 +40,8 @@ const AlbumDetails = () => {
               <span>Photos:{photoAlbum.length}</span>
             </div>
             <div className="right-side-content-container">
-              {photoAlbum.map((item) => (
-                <div className="right-side-content">
+              {photoAlbum.map((item, idx) => (
+                <div className="right-side-content" key={idx}>
                   <img
                     src={item?.thumbnailUrl}
                     alt="mini"

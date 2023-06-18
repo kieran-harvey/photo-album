@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Grid } from "@mui/material";
 import { getFromLocalStorage, saveToLocalStorage } from "../../utils";
 import DetailCard from "../../components/detail-card/DetailCard";
 import "./home.css";
-import Header from "../../components/header/Header";
 
 const Home = () => {
   const [albumData, setAlbumData] = useState();
@@ -48,7 +46,6 @@ const Home = () => {
   };
   return (
     <>
-      <Header />
       <div>
         <div className="home-container">
           <div className="filter">
@@ -61,11 +58,13 @@ const Home = () => {
             />
           </div>
           <div className="card-container">
-            {albumData?.map((item) => {
-              if (item?.title.toLowerCase().includes(filter)) {
+            {albumData
+              ?.filter((item) => {
+                return item?.title.toLowerCase().includes(filter);
+              })
+              .map((item) => {
                 return <DetailCard item={item} key={item.id} />;
-              }
-            })}
+              })}
           </div>
         </div>
       </div>
